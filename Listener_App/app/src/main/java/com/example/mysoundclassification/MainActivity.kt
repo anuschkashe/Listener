@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         btnRecord.setOnClickListener {
             if (btnRecord.text.toString() == "Record and Classify") {
 
-                object : CountDownTimer(10000, 500) {
+                object : CountDownTimer(2000, 500) {
                     override fun onTick(millisUntilFinished: Long) {
                         timeLimit.setText("seconds remaining: " + millisUntilFinished / 1000)
                     }
