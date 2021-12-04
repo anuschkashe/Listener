@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Dec  2 10:25:39 2021
-
-@author: User
-"""
-# -*- coding: utf-8 -*-
-"""
 Created on Tue Nov 30 14:13:33 2021
 
 @author: User
@@ -44,8 +38,6 @@ print(f"Model Maker Version: {mm.__version__}")
 # @title [Run this] Util functions and data structures.
 
 data_dir = 'C:/Users/User/Desktop/letitrock/eth_medical/Code_python/dataset/1_training'
-#data_dir = 'C:/Users/User/Downloads/Audios/mein_Datenset/1_own_dataset/small_birds_dataset'
-#data_dir = 'C:/Users/User/Downloads/Audios/mein_Datenset/Training/1_small_dataset/'
 
 #%%
 test_files = os.path.abspath(os.path.join(data_dir, 'test/*/*.wav'))
