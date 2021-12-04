@@ -19,13 +19,8 @@ import kotlin.concurrent.scheduleAtFixedRate
 class MainActivity : AppCompatActivity() {
     var TAG = "MainActivity"
 
-    // TODO 2.1: defines the model to be used
     var modelPath = "try9.tflite"
-
-    // TODO 2.2: defining the minimum threshold
     var probabilityThreshold: Float = 0.4f
-
-    //lateinit var textView: TextViewProb
 
     private var mytimer: Timer? = null
 
@@ -57,37 +52,25 @@ class MainActivity : AppCompatActivity() {
                         btnRecord.text = "Record and Classify"
                     }
                 }.start()
-
-                // TODO 2.3: Loading the model from the assets folder
-
                 val classifier = AudioClassifier.createFromFile(this, modelPath)
-
-                // TODO 3.1: Creating an audio recorder
                 val tensor = classifier.createInputTensorAudio()
-
-                // TODO 3.2: showing the audio recorder specification
                 val format = classifier.requiredTensorAudioFormat
                 val recorderSpecs = "Number Of Channels: ${format.channels}\n" +
                         "Sample Rate: ${format.sampleRate}"
                 recorderSpecsTextView.text = recorderSpecs
 
-                // TODO 3.3: Creating
                 val record = classifier.createAudioRecord()
                 record.startRecording()
 
                 mytimer = Timer().apply {
                     scheduleAtFixedRate(1, 109) {
 
-                        // TODO 4.1: Classifing audio data
                         tensor.load(record)
                         val output = classifier.classify(tensor)
-
-                        // TODO 4.2: Filtering out classifications with low probability
                         val filteredModelOutput = output[0].categories.filter {
                             it.score > probabilityThreshold
                         }
 
-                        // TODO 4.3: Creating a multiline string with the filtered results
                         val outputStr =
                             filteredModelOutput.sortedBy { -it.score }
                                 .joinToString(separator = "\n") { "${it.label} -> ${it.score} " }
@@ -102,7 +85,6 @@ class MainActivity : AppCompatActivity() {
 
                         val outP = outputProb.take(4)
 
-                        // TODO 4.4: Updating the UI
                         if (outputStr.isNotEmpty())
                             runOnUiThread {
                                 textViewClass.text = outputClass
@@ -110,12 +92,8 @@ class MainActivity : AppCompatActivity() {
                             }
                     }
                 }
-
                 btnRecord.text = "Say something"
             }
-            //else{
-            //  mytimer?.cancel()
-            // btnRecord.text = "Record & Classify"
         }
     }
 }
